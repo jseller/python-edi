@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "pythonedi"
+version = "0.1.0"
+description = "EDI JSON tools for parsing, generation and conversion"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+badX12 = "0.2.2"
+

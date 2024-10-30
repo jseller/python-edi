@@ -1,0 +1,2966 @@
+
+[
+    {   "id": "ISA", "type": "segment",
+        "name": "Interchange Control Header",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "",
+        "elements": [
+            {   "id": "ISA01", "type": "element",
+                "name": "Authorization Information Qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"00": "(default)"},
+                "length": {"min": 2, "max": 2},
+                "notes": "Code to identify the type of information in the Authorization Information"
+            },
+            {   "id": "ISA02", "type": "element",
+                "name": "Authorization Information",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 10, "max": 10},
+                "notes": "Information used for additional identification or authorization of the interchange sender or the data in the interchange; the type of information is set by the Authorization Information Qualifier (I01)"
+            },
+            {   "id": "ISA03", "type": "element",
+                "name": "Security Information Qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"00": "(default)"},
+                "length": {"min": 2, "max": 2},
+                "notes": "Code to identify the type of information in the Security Information"
+            },
+            {   "id": "ISA04", "type": "element",
+                "name": "Security Information",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 10, "max": 10},
+                "notes": "This is used for identifying the security information about the interchange sender or the data in the interchange; the type of information is set by the Security Information Qualifier (I03)"
+            },
+            {   "id": "ISA05", "type": "element",
+                "name": "Interchange Sender ID Qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"ZZ": "Mutually Defined"},
+                "length": {"min": 2, "max": 2},
+                "notes": "Qualifier to designate the system/method of code structure used to designate the sender or receiver ID element being qualified"
+            },
+            {   "id": "ISA06", "type": "element",
+                "name": "Interchange Sender ID",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 15, "max": 15},
+                "notes": "Identification code published by the sender for other parties to use as the receiver ID to route data to them; the sender always codes this value in the sender ID element"
+            },
+            {   "id": "ISA07", "type": "element",
+                "name": "Interchange Receiver ID Qualifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"ZZ": "Mutually Defined"},
+                "length": {"min": 2, "max": 2},
+                "notes": "Qualifier to designate the system/method of code structure used to designate the sender or receiver ID element being qualified"
+            },
+            {   "id": "ISA08", "type": "element",
+                "name": "Interchange Receiver ID",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 15, "max": 15},
+                "notes": "Identification code published by the receiver of the data; When sending, it is used by the sender as their sending ID, thus other parties sending to them will use this as a receiving ID to route data to them"
+            },
+            {   "id": "ISA09", "type": "element",
+                "name": "Interchange Date",
+                "req": "M",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {"min": 6, "max": 6},
+                "notes": "Date of the interchange"
+            },
+            {   "id": "ISA10", "type": "element",
+                "name": "Interchange Time",
+                "req": "M",
+                "data_type": "TM",
+                "data_type_ids": null,
+                "length": {"min": 4, "max": 4},
+                "notes": "Time of the interchange"
+            },
+            {   "id": "ISA11", "type": "element",
+                "name": "Interchange Control Standards Identifier",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 1},
+                "notes": "Code to identify the agency responsible for the control standard used by the message that is enclosed by the interchange header and trailer"
+            },
+            {   "id": "ISA12", "type": "element",
+                "name": "Interchange Control Version Number",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"U": "(default)"},
+                "length": {"min": 5, "max": 5},
+                "notes": "This version number covers the interchange control segments"
+            },
+            {   "id": "ISA13", "type": "element",
+                "name": "Interchange Control Number",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 9, "max": 9},
+                "notes": "A control number assigned by the interchange sender"
+            },
+            {   "id": "ISA14", "type": "element",
+                "name": "Acknowledgment Requested",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"0": "Requested"},
+                "length": {"min": 1, "max": 1},
+                "notes": "Code sent by the sender to request an interchange acknowledgment (TA1)"
+            },
+            {   "id": "ISA15", "type": "element",
+                "name": "Usage Indicator",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"T": "Test", "P": "Production", "I": "Information"},
+                "length": {"min": 1, "max": 1},
+                "notes": "Code to indicate whether data enclosed by this interchange envelope is test, production or information"
+            },
+            {   "id": "ISA16", "type": "element",
+                "name": "Component Element Separator",
+                "req": "M",
+                "data_type": "",
+                "data_type_ids": {"T": "Test", "P": "Production", "I": "Information"},
+                "length": {"min": 1, "max": 1},
+                "notes": "Type is not applicable; the component element separator is a delimiter and not a data element; this field provides the delimiter used to separate component data elements within a composite data structure; this value must be different than the data element separator and the segment terminator"
+            }
+        ]
+    },
+    {   "id": "GS", "type": "segment",
+        "name": "Functional Group Header",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "",
+        "elements": [
+            {   "id": "GS01", "type": "element",
+                "name": "Functional Identifier Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"IN": "Invoice"},
+                "length": {"min": 2, "max": 2},
+                "notes": "Code identifying a group of application related transaction sets"
+            },
+            {   "id": "GS02", "type": "element",
+                "name": "Application Sender's Code",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 2, "max": 15},
+                "notes": "Code identifying party sending transmission; codes agreed to by trading partners"
+            },
+            {   "id": "GS03", "type": "element",
+                "name": "Application Receiver's Code",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 2, "max": 15},
+                "notes": "Code identifying party receiving transmission. Codes agreed to by trading partners"
+            },
+            {   "id": "GS04", "type": "element",
+                "name": "Date",
+                "req": "M",
+                "data_type": "DT",
+                "data_type_ids": null,
+                "length": {"min": 8, "max": 8},
+                "notes": "Date expressed as CCYYMMDD"
+            },
+            {   "id": "GS05", "type": "element",
+                "name": "Time",
+                "req": "M",
+                "data_type": "TM",
+                "data_type_ids": null,
+                "length": {"min": 4, "max": 8},
+                "notes": "Time expressed in 24-hour clock time as follows: HHMM, or HHMMSS, or HHMMSSD, or HHMMSSDD"
+            },
+            {   "id": "GS06", "type": "element",
+                "name": "Group Control Number",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 9},
+                "notes": "Assigned number originated and maintained by the sender"
+            },
+            {   "id": "GS07", "type": "element",
+                "name": "Responsible Agency Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"X": "", "T": ""},
+                "length": {"min": 1, "max": 2},
+                "notes": "Code used in conjunction with Data Element 480 to identify the issuer of the standard"
+            },
+            {   "id": "GS08", "type": "element",
+                "name": "Version / Release / Industry Identifier Code",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 12},
+                "notes": "Code indicating the version, release, subrelease, and industry identifier of the EDI standard being used, including the GS and GE segments; if code in DE455 in GS segment is X, then in DE 480 positions 1-3 are the version number; positions 4-6 are the release and subrelease, level of the version; and positions 7-12 are the industry or trade association identifiers (optionally assigned by user); if code in DE455 in GS segment is T, then other formats are allowed"
+            }
+        ]
+    },
+    {   "id": "ST", "type": "segment",
+        "name": "Transaction Set Header",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "",
+        "elements": [
+            {   "id": "ST01", "type": "element",
+                "name": "Transaction Set Identifier Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"810": "Invoice"},
+                "length": {"min": 3, "max": 3},
+                "notes": ""
+            },
+            {   "id": "ST02", "type": "element",
+                "name": "Transaction Set Control Number",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 4, "max": 9},
+                "notes": "This should be a unique control # for each transaction set functional group"
+            }
+        ]
+    },
+    {
+        "id": "B2A",
+        "type": "segment",
+        "name": "Set Purpose",
+        "sec": "H",
+        "pos": "1",
+        "req": "M",
+        "max_uses": 1,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "B2A01",
+                "type": "element",
+                "name": "Transaction Set Purpose Code",
+                "req": "M",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "B2A02",
+                "type": "element",
+                "name": "Application Type",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "Y6",
+        "type": "segment",
+        "name": "Authentication",
+        "sec": "H",
+        "pos": "2",
+        "req": "O",
+        "max_uses": 2,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "Y601",
+                "type": "element",
+                "name": "Authority Identifier Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "Y602",
+                "type": "element",
+                "name": "Authority",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "Y603",
+                "type": "element",
+                "name": "Authorization Date",
+                "req": "M",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "N9",
+        "type": "segment",
+        "name": "Extended Reference Information",
+        "sec": "H",
+        "pos": "3",
+        "req": "M",
+        "max_uses": 10,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "N901",
+                "type": "element",
+                "name": "Reference Identification Qualifier",
+                "req": "M",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "N902",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "N903",
+                "type": "element",
+                "name": "Free-Form Description",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 45
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "N904",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "N905",
+                "type": "element",
+                "name": "Time",
+                "req": "C",
+                "length": {
+                    "min": 4,
+                    "max": 8
+                },
+                "data_type": "TM",
+                "data_type_ids": null
+            },
+            {
+                "id": "N906",
+                "type": "element",
+                "name": "Time Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "N907",
+                "type": "element",
+                "name": "Reference Identification Qualifier",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "N908",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "N909",
+                "type": "element",
+                "name": "Reference Identification Qualifier",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "N910",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "N911",
+                "type": "element",
+                "name": "Reference Identification Qualifier",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "N912",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "V1",
+        "type": "segment",
+        "name": "Vessel Identification",
+        "sec": "H",
+        "pos": "4",
+        "req": "O",
+        "max_uses": 1,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "V101",
+                "type": "element",
+                "name": "Vessel Code",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 8
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V102",
+                "type": "element",
+                "name": "Vessel Name",
+                "req": "C",
+                "length": {
+                    "min": 2,
+                    "max": 28
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V103",
+                "type": "element",
+                "name": "Country Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V104",
+                "type": "element",
+                "name": "Flight/Voyage Number",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 10
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V105",
+                "type": "element",
+                "name": "Standard Carrier Alpha Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 4
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V106",
+                "type": "element",
+                "name": "Vessel Requirement Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V107",
+                "type": "element",
+                "name": "Vessel Type Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V108",
+                "type": "element",
+                "name": "Vessel Code Qualifier",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V109",
+                "type": "element",
+                "name": "Transportation Method/Type Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "V2",
+        "type": "segment",
+        "name": "Vessel Information",
+        "sec": "H",
+        "pos": "5",
+        "req": "O",
+        "max_uses": 1,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "V201",
+                "type": "element",
+                "name": "Location Identifier",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V202",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V203",
+                "type": "element",
+                "name": "Weight",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "V204",
+                "type": "element",
+                "name": "Weight Unit Code",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V205",
+                "type": "element",
+                "name": "Weight",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "V206",
+                "type": "element",
+                "name": "Weight Unit Code",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V207",
+                "type": "element",
+                "name": "Weight",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "V208",
+                "type": "element",
+                "name": "Weight Unit Code",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V209",
+                "type": "element",
+                "name": "Weight",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "V210",
+                "type": "element",
+                "name": "Weight Unit Code",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V211",
+                "type": "element",
+                "name": "Weight",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "V212",
+                "type": "element",
+                "name": "Weight Unit Code",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V213",
+                "type": "element",
+                "name": "Name",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 60
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V214",
+                "type": "element",
+                "name": "Length",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 8
+                },
+                "data_type": "R8",
+                "data_type_ids": null
+            },
+            {
+                "id": "V215",
+                "type": "element",
+                "name": "Unit Or Basis For Measurement Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "V216",
+                "type": "element",
+                "name": "Quantity",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "V217",
+                "type": "element",
+                "name": "Quantity",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "V3",
+        "type": "segment",
+        "name": "Vessel Schedule",
+        "sec": "H",
+        "pos": "6",
+        "req": "O",
+        "max_uses": 1,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "V301",
+                "type": "element",
+                "name": "Current Port Of Loading",
+                "req": "M",
+                "length": {
+                    "min": 2,
+                    "max": 24
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V302",
+                "type": "element",
+                "name": "Date",
+                "req": "M",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "V303",
+                "type": "element",
+                "name": "Next Port Of Discharge",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 24
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "V304",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "DTM",
+        "type": "segment",
+        "name": "Date/Time Reference",
+        "sec": "H",
+        "pos": "7",
+        "req": "O",
+        "max_uses": 2,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "DTM01",
+                "type": "element",
+                "name": "Date/Time Qualifier",
+                "req": "M",
+                "length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "DTM02",
+                "type": "element",
+                "name": "Date",
+                "req": "C",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "DTM03",
+                "type": "element",
+                "name": "Time",
+                "req": "C",
+                "length": {
+                    "min": 4,
+                    "max": 8
+                },
+                "data_type": "TM",
+                "data_type_ids": null
+            },
+            {
+                "id": "DTM04",
+                "type": "element",
+                "name": "Time Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "DTM05",
+                "type": "element",
+                "name": "Date Time Period Format Qualifier",
+                "req": "C",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "DTM06",
+                "type": "element",
+                "name": "Date Time Period",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 35
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {   "id": "L_N1", "type": "loop",
+        "name": "Name Loop",
+        "req": "O",
+        "repeat": 200,
+        "segments": [
+            {   "id": "N1", "type": "segment",
+                "name": "Name",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To identify a party by type of organization, name, and code",
+                "elements": [
+                    {   "id": "N101", "name": "Entity Identifier Code",
+                        "type": "element",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "BT": "Bill-to-Party", 
+                            "BY": "Buying Party (Purchaser)", 
+                            "CA": "Carrier", 
+                            "DU": "Reseller", 
+                            "EN": "End User", 
+                            "II": "Issuer of Invoice", 
+                            "PR": "Payer", 
+                            "SE": "Selling Party", 
+                            "SO": "Sold To If Different From Bill To", 
+                            "ST": "Ship To",
+                            "VN": "Vendor"
+                        },
+                        "length": {"min": 2, "max": 3},
+                        "notes": "Code identifying an organizational entity, a physical location, property or an individual"
+                    },
+                    {   "id": "N102", "name": "Name",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 60},
+                        "notes": "Free-form name"
+                    },
+                    {   "id": "N103", "name": "Identification Code Qualifier",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 2},
+                        "notes": "Code designating the system/method of code structure used for Identification Code (N104)"
+                    },
+                    {   "id": "N104", "name": "Identification Code",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {
+                            "1": "DUNS Number", 
+                            "9": "DUNS Number with 4-digit suffix", 
+                            "21": "Health Care Industry ID No.",
+                            "91": "Assigned by seller",
+                            "92": "Assigned by Buyer or Agent",
+                            "ZZ": "Mutually Defined"
+                        },
+                        "length": {"min": 1, "max": 2},
+                        "notes": "Receiver ID Number"
+                    }
+                ]
+            },
+            {   "id": "N2", "type": "segment",
+                "name": "Additional Name Information",
+                "req": "O",
+                "max_uses": 2,
+                "notes": "To specify additional names or those longer than 35 characters in length",
+                "elements": [
+                    {   "id": "N201", "type": "element",
+                        "name": "Name",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 60},
+                        "notes": "Free-form name"
+                    },
+                    {   "id": "N202", "type": "element",
+                        "name": "Name",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 60},
+                        "notes": "Free-form name"
+                    }
+                ]
+            },
+            {   "id": "N3", "type": "segment",
+                "name": "Address Information",
+                "req": "O",
+                "max_uses": 2,
+                "notes": "To specify the location of the named party",
+                "elements": [
+                    {   "id": "N301", "name": "Address Information",
+                        "type": "element",
+                        "req": "M",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 55},
+                        "notes": "Address Information"
+                    },
+                    {   "id": "N302", "name": "Address Information",
+                        "type": "element",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 55},
+                        "notes": "Address Information"
+                    }
+                ]
+            },
+            {   "id": "N4", "type": "segment",
+                "name": "Geographic Location",
+                "req": "O",
+                "max_uses": 1,
+                "notes": "To specify the geographic place of the named party",
+                "elements": [
+                    {   "id": "N401", "type": "element",
+                        "name": "City Name",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 2, "max": 30},
+                        "notes": "Address Information"
+                    },
+                    {   "id": "N402", "type": "element",
+                        "name": "State or Province Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {"min": 2, "max": 2},
+                        "notes": "Code (Standard State/Province) as defined by appropriate government agency"
+                    },
+                    {   "id": "N403", "type": "element",
+                        "name": "Postal Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {"min": 3, "max": 15},
+                        "notes": "Code defining international postal zone code excluding punctuation and blanks (zip code for United States)"
+                    },
+                    {   "id": "N404", "type": "element",
+                        "name": "Country Code",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": null,
+                        "length": {"min": 2, "max": 3},
+                        "notes": "Code identifying the country"
+                    }
+                ]
+            },
+            {   "id": "PER", "type": "segment",
+                "name": "Administrative Communications Contact",
+                "req": "O",
+                "max_uses": 3,
+                "notes": "To identify a person or office to whom administrative communications should be directed",
+                "elements": [
+                    {   "id": "PER01", "type": "element",
+                        "name": "Contact Function Code",
+                        "req": "M",
+                        "data_type": "ID",
+                        "data_type_ids": {"CN": "General Contact", "RE": "Contact For Problems"},
+                        "length": {"min": 2, "max": 2},
+                        "notes": "Code identifying the major duty or responsibility of the person or group named"
+                    },
+                    {   "id": "PER02", "type": "element",
+                        "name": "Name",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 60},
+                        "notes": "Free-form name"
+                    },
+                    {   "id": "PER03", "type": "element",
+                        "name": "Communications Number Type",
+                        "req": "O",
+                        "data_type": "ID",
+                        "data_type_ids": {"TE": "Telephone", "EM": "Email", "FX": "Facsimile"},
+                        "length": {"min": 2, "max": 2},
+                        "notes": "Code identifying the communications number type"
+                    },
+                    {   "id": "PER04", "type": "element",
+                        "name": "Communications Number",
+                        "req": "O",
+                        "data_type": "AN",
+                        "data_type_ids": null,
+                        "length": {"min": 1, "max": 80},
+                        "notes": "Number for communications"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "R4",
+        "type": "segment",
+        "name": "Port Or Terminal",
+        "sec": "H",
+        "pos": "12",
+        "req": "M",
+        "max_uses": 10,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "R401",
+                "type": "element",
+                "name": "Port Or Terminal Function Code",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "R402",
+                "type": "element",
+                "name": "Location Qualifier",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "R403",
+                "type": "element",
+                "name": "Location Identifier",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "R404",
+                "type": "element",
+                "name": "Port Name",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 24
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "R405",
+                "type": "element",
+                "name": "Country Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "R406",
+                "type": "element",
+                "name": "Terminal Name",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "R407",
+                "type": "element",
+                "name": "Pier Number",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "R408",
+                "type": "element",
+                "name": "State Or Province Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "K1",
+        "type": "segment",
+        "name": "Remarks",
+        "sec": "H",
+        "pos": "13",
+        "req": "O",
+        "max_uses": 5,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "K101",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "K102",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "K101",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "K102",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {   "id": "L_LX", "type": "loop",
+        "name": "Name Loop",
+        "req": "O",
+        "repeat": 200,
+        "segments": [
+            {
+                "id": "LX",
+                "type": "segment",
+                "name": "Transaction Set Line Number",
+                "sec": "D",
+                "pos": "14",
+                "req": "M",
+                "max_uses": 1,
+                "max_loop": 999,
+                "elements": [
+                    {
+                        "id": "LX01",
+                        "type": "element",
+                        "name": "Assigned Number",
+                        "req": "M",
+                        "length": {
+                            "min": 1,
+                            "max": 6
+                        },
+                        "data_type": "N0",
+                        "data_type_ids": null
+                    }
+                ]
+            },
+            {
+                "id": "Y2",
+                "type": "segment",
+                "name": "Container Details",
+                "sec": "D",
+                "pos": "15",
+                "req": "O",
+                "max_uses": 10,
+                "max_loop": 0,
+                "elements": [
+                    {
+                        "id": "Y201",
+                        "type": "element",
+                        "name": "Number Of Containers",
+                        "req": "M",
+                        "length": {
+                            "min": 1,
+                            "max": 4
+                        },
+                        "data_type": "N0",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y202",
+                        "type": "element",
+                        "name": "Container Type Request Code",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y203",
+                        "type": "element",
+                        "name": "Type Of Service Code",
+                        "req": "O",
+                        "length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y204",
+                        "type": "element",
+                        "name": "Equipment Type",
+                        "req": "M",
+                        "length": {
+                            "min": 4,
+                            "max": 4
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y205",
+                        "type": "element",
+                        "name": "Transportation Method/Type Code",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y206",
+                        "type": "element",
+                        "name": "Intermodal Service Code",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y207",
+                        "type": "element",
+                        "name": "Standard Carrier Alpha Code",
+                        "req": "O",
+                        "length": {
+                            "min": 2,
+                            "max": 4
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y208",
+                        "type": "element",
+                        "name": "Container Terms Code",
+                        "req": "O",
+                        "length": {
+                            "min": 3,
+                            "max": 3
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y209",
+                        "type": "element",
+                        "name": "Container Terms Code Qualifier",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "Y210",
+                        "type": "element",
+                        "name": "Total Stop-Offs",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "data_type": "N0",
+                        "data_type_ids": null
+                    }
+                ]
+            },
+            {
+                "id": "ED",
+                "type": "segment",
+                "name": "Equipment Description",
+                "sec": "D",
+                "pos": "16",
+                "req": "O",
+                "max_uses": 1,
+                "max_loop": 999,
+                "elements": [
+                    {
+                        "id": "ED01",
+                        "type": "element",
+                        "name": "Equipment Initial",
+                        "req": "M",
+                        "length": {
+                            "min": 1,
+                            "max": 4
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED02",
+                        "type": "element",
+                        "name": "Equipment Number",
+                        "req": "M",
+                        "length": {
+                            "min": 1,
+                            "max": 15
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED03",
+                        "type": "element",
+                        "name": "Load/Empty Status Code",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED04",
+                        "type": "element",
+                        "name": "Commodity Code",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED05",
+                        "type": "element",
+                        "name": "Lading Description",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED06",
+                        "type": "element",
+                        "name": "Waybill Number",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 6
+                        },
+                        "data_type": "N0",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED07",
+                        "type": "element",
+                        "name": "Equipment Number",
+                        "req": "O",
+                        "length": {
+                            "min": 1,
+                            "max": 15
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "ED08",
+                        "type": "element",
+                        "name": "Date",
+                        "req": "O",
+                        "length": {
+                            "min": 8,
+                            "max": 8
+                        },
+                        "data_type": "DT",
+                        "data_type_ids": null
+                    }
+                ]
+            },
+            {
+                "id": "M7",
+                "type": "segment",
+                "name": "Seal Numbers",
+                "sec": "D",
+                "pos": "17",
+                "req": "O",
+                "max_uses": 5,
+                "max_loop": 0,
+                "elements": [
+                    {
+                        "id": "M701",
+                        "type": "element",
+                        "name": "Seal Number",
+                        "req": "M",
+                        "length": {
+                            "min": 2,
+                            "max": 15
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "M702",
+                        "type": "element",
+                        "name": "Seal Number",
+                        "req": "O",
+                        "length": {
+                            "min": 2,
+                            "max": 15
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "M703",
+                        "type": "element",
+                        "name": "Seal Number",
+                        "req": "O",
+                        "length": {
+                            "min": 2,
+                            "max": 15
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "M704",
+                        "type": "element",
+                        "name": "Seal Number",
+                        "req": "O",
+                        "length": {
+                            "min": 2,
+                            "max": 15
+                        },
+                        "data_type": "AN",
+                        "data_type_ids": null
+                    },
+                    {
+                        "id": "M705",
+                        "type": "element",
+                        "name": "Entity Identifier Code",
+                        "req": "O",
+                        "length": {
+                            "min": 2,
+                            "max": 3
+                        },
+                        "data_type": "ID",
+                        "data_type_ids": null
+                    }
+                ]
+            },
+            {   
+                "id": "L_L0", "type": "loop",
+                    "name": "Name Loop",
+                    "req": "O",
+                    "repeat": 200,
+                    "segments": [
+                        {
+                        "id": "L0",
+                        "type": "segment",
+                        "name": "Line Item - Quantity And Weight",
+                        "sec": "D",
+                        "pos": "21",
+                        "req": "O",
+                        "max_uses": 1,
+                        "max_loop": 120,
+                        "elements": [
+                            {
+                                "id": "L001",
+                                "type": "element",
+                                "name": "Lading Line Item Number",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 3
+                                },
+                                "data_type": "N0",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L002",
+                                "type": "element",
+                                "name": "Billed/Rated-As Quantity",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 11
+                                },
+                                "data_type": "R",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L003",
+                                "type": "element",
+                                "name": "Billed/Rated-As Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L004",
+                                "type": "element",
+                                "name": "Weight",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 10
+                                },
+                                "data_type": "R",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L005",
+                                "type": "element",
+                                "name": "Weight Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L006",
+                                "type": "element",
+                                "name": "Volume",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L007",
+                                "type": "element",
+                                "name": "Volume Unit Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L008",
+                                "type": "element",
+                                "name": "Lading Quantity",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 7
+                                },
+                                "data_type": "N0",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L009",
+                                "type": "element",
+                                "name": "Packaging Form Code",
+                                "req": "C",
+                                "length": {
+                                    "min": 3,
+                                    "max": 3
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L010",
+                                "type": "element",
+                                "name": "Dunnage Description",
+                                "req": "O",
+                                "length": {
+                                    "min": 2,
+                                    "max": 25
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L011",
+                                "type": "element",
+                                "name": "Weight Unit Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L012",
+                                "type": "element",
+                                "name": "Type Of Service Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L013",
+                                "type": "element",
+                                "name": "Quantity",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 15
+                                },
+                                "data_type": "R",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L014",
+                                "type": "element",
+                                "name": "Packaging Form Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 3,
+                                    "max": 3
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L015",
+                                "type": "element",
+                                "name": "Yes/No Condition Or Response Code",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            }
+                        ]
+                    },
+                    {
+                        "id": "L3",
+                        "type": "segment",
+                        "name": "Total Weight And Charges",
+                        "sec": "S",
+                        "pos": "26",
+                        "req": "O",
+                        "max_uses": 1,
+                        "max_loop": 0,
+                        "elements": [
+                            {
+                                "id": "L301",
+                                "type": "element",
+                                "name": "Weight",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 10
+                                },
+                                "data_type": "R",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L302",
+                                "type": "element",
+                                "name": "Weight Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L303",
+                                "type": "element",
+                                "name": "Freight Rate",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 9
+                                },
+                                "data_type": "R9",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L304",
+                                "type": "element",
+                                "name": "Rate/Value Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L305",
+                                "type": "element",
+                                "name": "Amount Charged",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 15
+                                },
+                                "data_type": "N2",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L306",
+                                "type": "element",
+                                "name": "Advances",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 9
+                                },
+                                "data_type": "N2",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L307",
+                                "type": "element",
+                                "name": "Prepaid Amount",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 15
+                                },
+                                "data_type": "N2",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L308",
+                                "type": "element",
+                                "name": "Special Charge Or Allowance Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 3,
+                                    "max": 3
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L309",
+                                "type": "element",
+                                "name": "Volume",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L310",
+                                "type": "element",
+                                "name": "Volume Unit Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L311",
+                                "type": "element",
+                                "name": "Lading Quantity",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 7
+                                },
+                                "data_type": "N0",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L312",
+                                "type": "element",
+                                "name": "Weight Unit Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L313",
+                                "type": "element",
+                                "name": "Tariff Number",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 7
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L314",
+                                "type": "element",
+                                "name": "Declared Value",
+                                "req": "C",
+                                "length": {
+                                    "min": 2,
+                                    "max": 12
+                                },
+                                "data_type": "N2",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L315",
+                                "type": "element",
+                                "name": "Rate/Value Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 2,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            }
+                        ]
+                    },
+
+                    {
+                        "id": "L4",
+                        "type": "segment",
+                        "name": "Measurement",
+                        "sec": "D",
+                        "pos": "23",
+                        "req": "O",
+                        "max_uses": 1,
+                        "max_loop": 0,
+                        "elements": [
+                            {
+                                "id": "L401",
+                                "type": "element",
+                                "name": "Length",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L402",
+                                "type": "element",
+                                "name": "Width",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L403",
+                                "type": "element",
+                                "name": "Height",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L404",
+                                "type": "element",
+                                "name": "Measurement Unit Qualifier",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L405",
+                                "type": "element",
+                                "name": "Quantity",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 15
+                                },
+                                "data_type": "R",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L406",
+                                "type": "element",
+                                "name": "Industry Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 30
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L401",
+                                "type": "element",
+                                "name": "Length",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L402",
+                                "type": "element",
+                                "name": "Width",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L403",
+                                "type": "element",
+                                "name": "Height",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 8
+                                },
+                                "data_type": "R8",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L404",
+                                "type": "element",
+                                "name": "Measurement Unit Qualifier",
+                                "req": "M",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L405",
+                                "type": "element",
+                                "name": "Quantity",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 15
+                                },
+                                "data_type": "R",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L406",
+                                "type": "element",
+                                "name": "Industry Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 30
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            }
+                        ]
+                    },
+                    {
+                        "id": "L5",
+                        "type": "segment",
+                        "name": "Description, Marks And Numbers",
+                        "sec": "D",
+                        "pos": "22",
+                        "req": "M",
+                        "max_uses": 999,
+                        "max_loop": 0,
+                        "elements": [
+                            {
+                                "id": "L501",
+                                "type": "element",
+                                "name": "Lading Line Item Number",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 3
+                                },
+                                "data_type": "N0",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L502",
+                                "type": "element",
+                                "name": "Lading Description",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 50
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L503",
+                                "type": "element",
+                                "name": "Commodity Code",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 30
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L504",
+                                "type": "element",
+                                "name": "Commodity Code Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L505",
+                                "type": "element",
+                                "name": "Packaging Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 3,
+                                    "max": 5
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L506",
+                                "type": "element",
+                                "name": "Marks And Numbers",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 48
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L507",
+                                "type": "element",
+                                "name": "Marks And Numbers Qualifier",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 2
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L508",
+                                "type": "element",
+                                "name": "Commodity Code Qualifier",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L509",
+                                "type": "element",
+                                "name": "Commodity Code",
+                                "req": "C",
+                                "length": {
+                                    "min": 1,
+                                    "max": 30
+                                },
+                                "data_type": "AN",
+                                "data_type_ids": null
+                            },
+                            {
+                                "id": "L510",
+                                "type": "element",
+                                "name": "Compartment Id Code",
+                                "req": "O",
+                                "length": {
+                                    "min": 1,
+                                    "max": 1
+                                },
+                                "data_type": "ID",
+                                "data_type_ids": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "NA",
+        "type": "segment",
+        "name": "Cross-Reference Equipment",
+        "sec": "D",
+        "pos": "18",
+        "req": "O",
+        "max_uses": 1,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "NA01",
+                "type": "element",
+                "name": "Reference Identification Qualifier",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA02",
+                "type": "element",
+                "name": "Reference Identification",
+                "req": "C",
+                "length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA03",
+                "type": "element",
+                "name": "Equipment Initial",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA04",
+                "type": "element",
+                "name": "Equipment Number",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA05",
+                "type": "element",
+                "name": "Cross Reference Type Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA06",
+                "type": "element",
+                "name": "Position",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 3
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA07",
+                "type": "element",
+                "name": "Standard Carrier Alpha Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 4
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA08",
+                "type": "element",
+                "name": "Equipment Length",
+                "req": "O",
+                "length": {
+                    "min": 4,
+                    "max": 5
+                },
+                "data_type": "N0",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA09",
+                "type": "element",
+                "name": "Standard Carrier Alpha Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 4
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA10",
+                "type": "element",
+                "name": "Chassis Type",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA11",
+                "type": "element",
+                "name": "Yes/No Condition Or Response Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "NA12",
+                "type": "element",
+                "name": "Equipment Number Check Digit",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "N0",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "G2",
+        "type": "segment",
+        "name": "Beyond Routing",
+        "sec": "D",
+        "pos": "20",
+        "req": "O",
+        "max_uses": 1,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "G201",
+                "type": "element",
+                "name": "Special Indicator Code",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "G202",
+                "type": "element",
+                "name": "Description",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "X1",
+        "type": "segment",
+        "name": "Export License",
+        "sec": "D",
+        "pos": "24",
+        "req": "O",
+        "max_uses": 5,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "X101",
+                "type": "element",
+                "name": "Code For Licensing, Certification, Registration, Or Accreditation",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X102",
+                "type": "element",
+                "name": "Export License Number",
+                "req": "O",
+                "length": {
+                    "min": 6,
+                    "max": 35
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "X103",
+                "type": "element",
+                "name": "Export License Status Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X104",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "X105",
+                "type": "element",
+                "name": "Export License Symbol Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X106",
+                "type": "element",
+                "name": "Export License Control Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X107",
+                "type": "element",
+                "name": "Country Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X108",
+                "type": "element",
+                "name": "Schedule B Code",
+                "req": "O",
+                "length": {
+                    "min": 7,
+                    "max": 10
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X109",
+                "type": "element",
+                "name": "International/Domestic Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X110",
+                "type": "element",
+                "name": "Lading Quantity",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 7
+                },
+                "data_type": "N0",
+                "data_type_ids": null
+            },
+            {
+                "id": "X111",
+                "type": "element",
+                "name": "Lading Value",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 9
+                },
+                "data_type": "R9",
+                "data_type_ids": null
+            },
+            {
+                "id": "X112",
+                "type": "element",
+                "name": "Export Filing Key Code",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X113",
+                "type": "element",
+                "name": "Unit Or Basis For Measurement Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "data_type": "ID",
+                "data_type_ids": null
+            },
+            {
+                "id": "X114",
+                "type": "element",
+                "name": "Unit Price",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 17
+                },
+                "data_type": "R",
+                "data_type_ids": null
+            },
+            {
+                "id": "X115",
+                "type": "element",
+                "name": "U.S. Government License Type",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "X116",
+                "type": "element",
+                "name": "Identification Code",
+                "req": "O",
+                "length": {
+                    "min": 2,
+                    "max": 80
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "X117",
+                "type": "element",
+                "name": "Location Identifier",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "X2",
+        "type": "segment",
+        "name": "Import License",
+        "sec": "D",
+        "pos": "25",
+        "req": "O",
+        "max_uses": 5,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "X201",
+                "type": "element",
+                "name": "Import License Number",
+                "req": "M",
+                "length": {
+                    "min": 6,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "X202",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "X203",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "X204",
+                "type": "element",
+                "name": "Import License Number",
+                "req": "C",
+                "length": {
+                    "min": 6,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "X205",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            },
+            {
+                "id": "X206",
+                "type": "element",
+                "name": "Date",
+                "req": "O",
+                "length": {
+                    "min": 8,
+                    "max": 8
+                },
+                "data_type": "DT",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {
+        "id": "K1",
+        "type": "segment",
+        "name": "Remarks",
+        "sec": "S",
+        "pos": "27",
+        "req": "O",
+        "max_uses": 2,
+        "max_loop": 0,
+        "elements": [
+            {
+                "id": "K101",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "K102",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "K101",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "M",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            },
+            {
+                "id": "K102",
+                "type": "element",
+                "name": "Free-Form Information",
+                "req": "O",
+                "length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "data_type": "AN",
+                "data_type_ids": null
+            }
+        ]
+    },
+    {   "id": "SE", "type": "segment",
+        "name": "Transaction Set Trailer",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To indicate the end of the transaction set and provide the count of the transmitted segments (including the beginning (ST) and ending (SE) segments)",
+        "elements": [
+            {   "id": "SE01", "type": "element",
+                "name": "Number of Included Segments",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 10},
+                "notes": "Total number of segments included in a transaction set including ST and SE segments"
+            },
+            {   "id": "SE02", "type": "element",
+                "name": "Transaction Set Control Number",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 4, "max": 9},
+                "notes": "Identifying control number that must be unique within the transaction set functional group assigned by the originator for a transaction set. Must match the control # in ST02"
+            }
+        ]
+    },
+    {   "id": "GE", "type": "segment",
+        "name": "Functional Group Trailer",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To indicate the end of a functional group and to provide control information",
+        "elements": [
+            {   "id": "GE01", "type": "element",
+                "name": "Number of Transaction Sets Included",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 6},
+                "notes": "Total number of transaction sets included in the functional group or interchange (transmission) group terminated by the trailer containing this data element"
+            },
+            {   "id": "GE02", "type": "element",
+                "name": "Group Control Number",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 9},
+                "notes": "Assigned number originated and maintained by the sender"
+            }
+        ]
+    },
+    {   "id": "IEA", "type": "segment",
+        "name": "Interchange Control Trailer",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "To define the end of an interchange of zero or more functional groups and interchange-related control segments",
+        "elements": [
+            {   "id": "IEA01", "type": "element",
+                "name": "Number of Included Functional Groups",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 1, "max": 5},
+                "notes": "A count of the number of functional groups included in an interchange"
+            },
+            {   "id": "IEA02", "type": "element",
+                "name": "Interchange Control Number",
+                "req": "M",
+                "data_type": "N0",
+                "data_type_ids": null,
+                "length": {"min": 9, "max": 9},
+                "notes": "A control number assigned by the interchange sender"
+            }
+        ]
+    }
+
+]

@@ -4,40 +4,55 @@ Provides hints if data is missing, incomplete, or incorrect.
 """
 
 import datetime
+import logging
 
 from .supported_formats import supported_formats
-from .debug import Debug
+
+WINDOWS_LINE_ENDING = '\r\n'
+UNIX_LINE_ENDING = '\n'
+MAC_LINE_ENDING = '\r'
 
 class EDIParser(object):
-    def __init__(self, edi_format=None, element_delimiter="^", segment_delimiter="\n", data_delimiter="`"):
-        # Set default delimiters
-        self.element_delimiter = element_delimiter
-        self.segment_delimiter = segment_delimiter
-        self.data_delimiter = data_delimiter
 
+    def __init__(self, source):
+        #source, carrier
+        self.source = source
+        self.segment_delimiter = UNIX_LINE_ENDING
+        self.stats = {}
+        self.stats['source'] = self.source
+
+    def detect(self, data):
+        self.element_delimiter = data[3:4]
+        last_four = bytes(data[-4:], 'utf-8')
+        print('last '+str(last_four))
+        if last_four.endswith(bytes(WINDOWS_LINE_ENDING, 'utf-8')):
+            self.segment_delimiter = str(WINDOWS_LINE_ENDING)
+        elif last_four.endswith(bytes(MAC_LINE_ENDING, 'utf-8')):
+            self.segment_delimiter = MAC_LINE_ENDING
+        elif last_four.endswith(bytes('~', 'utf-8')):
+            self.segment_delimiter = '~'
         # Set EDI format to use
-        if edi_format in supported_formats:
-            self.edi_format = supported_formats[edi_format]
-        elif edi_format is None:
-            self.edi_format = None
-        else:
-            raise ValueError("Unsupported EDI format {}".format(edi_format))
+        index = 'ST'+self.element_delimiter
+        find_index = data.find(index)
+        found_edi_format = data[find_index+ 3:find_index + 6]
+        if found_edi_format in supported_formats:
+            self.edi_format = supported_formats[found_edi_format]
+        self.stats['segment_delimiter'] = self.segment_delimiter
+        self.stats['element_delimiter'] = self.element_delimiter
+        self.stats['edi_format'] = found_edi_format
 
     def parse(self, data):
-        """ Processes each line in the string `data`, attempting to auto-detect the EDI type.
-
-        Returns the parsed message as a dict. """
-
-        # Break the message up into chunks
+        self.detect(data)
         edi_segments = data.split(self.segment_delimiter)
-
-        # Eventually, find the ST header and parse the EDI format
         if self.edi_format is None:
             raise NotImplementedError("EDI format autodetection not built yet. Please specify an EDI format.")
 
-        to_return = {}
-        found_segments = []
-        
+        manifest = {}
+        in_transaction = False
+        transactions = []
+        transaction_count = 0
+        transaction_segments = {}
+
         while len(edi_segments) > 0:
             segment = edi_segments[0]
             if segment == "":
@@ -65,16 +80,26 @@ class EDIParser(object):
                     break
                 
             if segment_obj is None:
-                Debug.log_error("Unrecognized segment: {}".format(segment))
+                logging.error("Unrecognized segment: {}".format(segment))
                 edi_segments = edi_segments[1:] # Skipping segment
                 continue
                 # raise ValueError
+            
+            #handle multiple transactions in same manifest
+            if segment_name == 'ST':
+                in_transaction = True
+            if in_transaction:
+                transaction_segments[segment_name] = segment_obj
+            else:
+                if segment_name == 'GE':
+                    manifest['TXN'] = transactions
+                manifest[segment_name] = segment_obj                
+            if segment_name == 'SE':
+                transactions.append(transaction_segments)
+                transaction_segments = {}
+                in_transaction = False
 
-            found_segments.append(segment_name)
-            to_return[segment_name] = segment_obj
-
-
-        return found_segments, to_return
+        return self.stats, manifest
 
     def parse_segment(self, segment, segment_format):
         """ Parse a segment into a dict according to field IDs """
@@ -82,25 +107,16 @@ class EDIParser(object):
         if fields[0] != segment_format["id"]:
             raise TypeError("Segment type {} does not match provided segment format {}".format(fields[0], segment_format["id"]))
         elif len(fields)-1 > len(segment_format["elements"]):
-            Debug.explain(segment_format)
+            logging.info(segment_format)
             raise TypeError("Segment has more elements than segment definition")
 
-        #segment_name = fields[0]
         to_return = {}
         for field, element in zip(fields[1:], segment_format["elements"]): # Skip the segment name field
             key = element["id"]
             if element["data_type"] == "DT":
-                if len(field) == 8:
-                    value = datetime.datetime.strptime(field, "%Y%m%d")
-                elif len(field) == 6:
-                    value = datetime.datetime.strptime(field, "%y%m%d")
-                else:
-                    value = field
+                value = field
             elif element["data_type"] == "TM":
-                if len(field) == 4:
-                    value = datetime.datetime.strptime(field, "%H%M")
-                elif len(field) == 6:
-                    value = datetime.datetime.strptime(field, "%H%M%S")
+                value = field
             elif element["data_type"] == "N0" and field != "":
                 value = int(field)
             elif element["data_type"].startswith("N") and field != "":
