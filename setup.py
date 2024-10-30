@@ -27,5 +27,6 @@ setup(
     keywords="x12 edi 810",
     packages=find_packages(exclude=['test']),
     package_data={"pythonedi": ["formats/*.json"]},
+    install_requires=['colorama'],
     include_package_data=True,
 )
